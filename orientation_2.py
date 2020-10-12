@@ -11,7 +11,7 @@ image = [
     e,e,e,e,e,e,e,e,
     e,e,e,e,e,e,e,e,
     w,w,w,e,e,w,w,w,
-    w,w,b,e,e,b,w,w,
+    w,w,b,e,e,w,w,b,
     w,w,w,e,e,w,w,w,
     e,e,e,e,e,e,e,e,
     e,e,e,e,e,e,e,e,
@@ -22,4 +22,4 @@ sense.set_pixels(image)
 
 while True:
     sleep(1)
-    sense.flip_v()
+    sense.flip_h()

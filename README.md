@@ -1,2 +1,2 @@
-This is the Repo for Year 10 Digital Technologies
+This is the teaching resource Repo for Year 10 Digital Technologies
 
