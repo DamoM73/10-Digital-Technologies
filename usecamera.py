@@ -18,6 +18,9 @@ while True:
     # get the next frame
     frame = vs.read()
     
+    #rotate frame
+    frame = imutils.rotate_bound(frame, angle=180)
+    
     # show video stream
     cv2.imshow('orig',frame)
     key = cv2.waitKey(1) & 0xff
