@@ -1,8 +1,8 @@
-import numpy as np
+#import numpy as np
 import cv2
 import time
 from imutils.video import VideoStream
-import imutils
+#import imutils
 
 frame_size = (320,240)
 
