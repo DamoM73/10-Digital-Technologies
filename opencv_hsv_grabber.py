@@ -9,21 +9,21 @@ def nothing(*arg):
     pass
 
 # Initial HSV GUI slider values to load on program start.
-icol = (0, 0, 0, 255, 255, 255)   # Red
+icol = (89, 0, 0, 125, 255, 255)   
 cv2.namedWindow('colorTest')
-# Lower range colour sliders.
+# Create lower range colour sliders
 cv2.createTrackbar('lowHue', 'colorTest', icol[0], 255, nothing)
 cv2.createTrackbar('lowSat', 'colorTest', icol[1], 255, nothing)
 cv2.createTrackbar('lowVal', 'colorTest', icol[2], 255, nothing)
-# Higher range colour sliders.
+# Create higher range colour sliders.
 cv2.createTrackbar('highHue', 'colorTest', icol[3], 255, nothing)
 cv2.createTrackbar('highSat', 'colorTest', icol[4], 255, nothing)
 cv2.createTrackbar('highVal', 'colorTest', icol[5], 255, nothing)
 
-# Raspberry pi file path example.
-#frame = cv2.imread('/home/pi/python3/opencv/color-test/colour-circles-test.jpg')
-# Windows file path example.
-frame = cv2.imread('colour-circles-test.jpg')
+# connect to camera
+frame_size = (320,240)
+capture = VideoStream(src=0, usePiCamera=True, resolution=frame_size, framerate=32).start()
+time.sleep(0.5)
 
 while True:
     # Get HSV values from the GUI sliders.
@@ -34,13 +34,17 @@ while True:
     highSat = cv2.getTrackbarPos('highSat', 'colorTest')
     highVal = cv2.getTrackbarPos('highVal', 'colorTest')
 
+    # grab an image of current frame from the camera
+    frame = capture.read()
+    frame = cv2.flip(frame, -1)
+    
     # Show the original image.
     cv2.imshow('frame', frame)
-    
+        
     # Blur methods available, comment or uncomment to try different blur methods.
-    frameBGR = cv2.GaussianBlur(frame, (7, 7), 0)
+    #frameBGR = cv2.GaussianBlur(frame, (7, 7), 0)
     #frameBGR = cv2.medianBlur(frame, 7)
-    #frameBGR = cv2.bilateralFilter(frame, 15 ,75, 75)
+    frameBGR = cv2.bilateralFilter(frame, 15 ,75, 75)
     """kernal = np.ones((15, 15), np.float32)/255
     frameBGR = cv2.filter2D(frame, -1, kernal)"""
     
@@ -72,8 +76,10 @@ while True:
     # Show final output image
     cv2.imshow('colorTest', result)
     
-    k = cv2.waitKey(5) & 0xFF
-    if k == 27:
+    # listen for exit key (q) to eixt main loop
+    if cv2.waitKey(1) & 0xff == ord('q'):
         break
-    
+
+# close program
 cv2.destroyAllWindows()
+capture.stop()

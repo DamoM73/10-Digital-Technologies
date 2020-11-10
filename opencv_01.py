@@ -2,17 +2,14 @@ import cv2
 import time
 from imutils.video import VideoStream
 
-# set variables
-frame_size = (320,240)
-
 # connect to camera
-capture = VideoStream(src=0, usePiCamera=True, resolution=frame_size, framerate=32).start()
+capture = VideoStream(src=0, usePiCamera=True).start()
 
 # allow camera to warm up
 time.sleep(0.5)
 
 # intiate main program loop
-while(True):
+while True:
     # grab an image of current frame from the camera
     frame = capture.read()
     
