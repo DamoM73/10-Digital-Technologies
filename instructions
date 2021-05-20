@@ -1,0 +1,4 @@
+x =  1G rotate 270 degrees
+x = -1G rotate 90 degrees
+y = -1G rotate 180 degrees
+otherwise rotate 0 degrees
