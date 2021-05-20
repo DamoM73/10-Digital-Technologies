@@ -1,3 +1,4 @@
+# display_image_01.py
 from sense_hat import SenseHat
 
 sense = SenseHat()
