@@ -1,0 +1,2 @@
+This text will be written to the file
+This text should be added to the previous text
